@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec $(dirname $0)/../vendor/jruby-1.1.6RC1/bin/jruby --manage $@

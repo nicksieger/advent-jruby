@@ -1,0 +1,2 @@
+svn export -r1135 http://jruby-extras.rubyforge.org/svn/trunk/jmx
+svn export -r152 http://rmagick4j.googlecode.com/svn/trunk/RMagick4J
