@@ -9,20 +9,28 @@ namespace :gruff do
 end
 
 namespace :jmx do
-  desc "Simple JMX memory monitoring example"
-  task :simple do
+  task :connect do
     require 'rubyadvent/jmxexamples'
+    options = {}
+    options[:user]     = ENV['jmxuser']     if ENV['jmxuser']
+    options[:password] = ENV['jmxpassword'] if ENV['jmxpassword']
+    options[:host]     = ENV['jmxhost']     if ENV['jmxhost']
+    JMXExamples.server(options) unless options.empty?
+  end
+
+  desc "Simple JMX memory monitoring example"
+  task :simple => :connect do
     JMXExamples.print_memory_usage
   end
 
-  task :memory do
+  desc "Gruff/JMX example plotting memory usage over time"
+  task :memory => :connect do
     require 'rubyadvent/gruffexamples'
-    require 'rubyadvent/jmxexamples'
     GruffExamples.memory_visualizer
   end
 end
 
-task :irb => :requires do
+task :irb do
   ARGV.clear
   require 'irb'
   IRB.start(__FILE__)

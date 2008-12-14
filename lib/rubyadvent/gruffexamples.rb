@@ -28,7 +28,7 @@ class GruffExamples
   def self.memory_visualizer
     @app = Java2d::ImageApp.new
     @app.title = "Memory"
-    @sampler = JMXExamples::MemorySampler.new do |s|
+    JMXExamples::MemorySampler.new do |s|
       g = Gruff::Line.new
       g.title = @app.title
       g.y_axis_label = "MB"
@@ -38,7 +38,6 @@ class GruffExamples
       @app.image = g.to_image
       @app.show unless @started
       @started = true
-    end
-    @sampler.start
+    end.start
   end
 end
