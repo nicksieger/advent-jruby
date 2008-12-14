@@ -14,6 +14,12 @@ namespace :jmx do
     require 'rubyadvent/jmxexamples'
     JMXExamples.print_memory_usage
   end
+
+  task :memory do
+    require 'rubyadvent/gruffexamples'
+    require 'rubyadvent/jmxexamples'
+    GruffExamples.memory_visualizer
+  end
 end
 
 task :irb => :requires do

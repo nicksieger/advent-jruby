@@ -2,6 +2,12 @@ require 'RMagick'
 require 'gruff'
 require 'java2d/image'
 
+class Gruff::Base
+  def to_image
+    Java2d::Image.new(to_blob)
+  end
+end
+
 class GruffExamples
   def self.simple
     g = Gruff::Line.new
@@ -14,6 +20,25 @@ class GruffExamples
 
     g.labels = {0 => '2003', 2 => '2004', 4 => '2005'}
 
-    Java2d::Image.new(g.to_blob).preview
+    app = Java2d::ImageApp.new(g.to_image)
+    app.title = g.title
+    app.show
+  end
+
+  def self.memory_visualizer
+    @app = Java2d::ImageApp.new
+    @app.title = "Memory"
+    @sampler = JMXExamples::MemorySampler.new do |s|
+      g = Gruff::Line.new
+      g.title = @app.title
+      g.y_axis_label = "MB"
+      s.samples.each_pair {|key,val| g.data(key, val) }
+      g.labels = {}
+      g.hide_dots = true
+      @app.image = g.to_image
+      @app.show unless @started
+      @started = true
+    end
+    @sampler.start
   end
 end
