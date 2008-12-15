@@ -18,7 +18,7 @@ namespace :jmx do
     JMXExamples.server(options) unless options.empty?
   end
 
-  desc "Simple JMX memory monitoring example"
+  desc "Simple JMX memory monitoring example: print memory usage"
   task :memory => :connect do
     JMXExamples.print_memory_usage
   end

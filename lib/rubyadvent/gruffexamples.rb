@@ -10,7 +10,7 @@ end
 
 class GruffExamples
   def self.simple
-    g = Gruff::Line.new
+    g = Gruff::Line.new("400x300")
     g.title = "My Graph"
 
     g.data("Apples", [1, 2, 3, 4, 4, 3])
@@ -29,7 +29,7 @@ class GruffExamples
     @app = Java2d::ImageApp.new
     @app.title = "Memory"
     JMXExamples::MemorySampler.new do |s|
-      g = Gruff::Line.new
+      g = Gruff::Line.new("400x300")
       g.title = @app.title
       g.y_axis_label = "MB"
       s.samples.each_pair {|key,val| g.data(key, val) }
