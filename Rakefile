@@ -1,4 +1,11 @@
-FileList['lib', 'vendor/*/lib'].each {|d| $LOAD_PATH.unshift File.expand_path(d) }
+%w(gruff rmagick4j jmx).each do |g|
+  begin
+    gem g
+  rescue Gem::LoadError
+    $LOAD_PATH.unshift File.expand_path(FileList['vendor/*/lib'].detect {|f| f =~ /#{g}/i})
+  end
+end
+$LOAD_PATH.unshift File.expand_path("lib")
 
 namespace :gruff do
   desc "Simple Gruff example with JRuby"
@@ -37,4 +44,11 @@ task :irb do
   require 'rubyadvent/gruffexamples'
   require 'rubyadvent/jmxexamples'
   IRB.start(__FILE__)
+end
+
+task :default do
+  puts "To run an example, re-run 'jruby -S rake' with one of the following tasks:"
+  class << Rake.application; public :display_tasks_and_comments; end
+  Rake.application.options.show_task_pattern = //
+  Rake.application.display_tasks_and_comments
 end
