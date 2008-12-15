@@ -37,9 +37,9 @@ namespace :jmx do
   end
 end
 
-desc "Run IRB with Gruff, RMagick4j and JMX loaded"
+desc "Run IRB with Gruff, RMagick4J and JMX loaded"
 task :irb do
-  ARGV.clear
+  ARGV.clear; ARGV << '--simple-prompt'
   require 'irb'
   require 'rubyadvent/gruffexamples'
   require 'rubyadvent/jmxexamples'
