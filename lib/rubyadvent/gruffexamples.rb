@@ -4,7 +4,7 @@ require 'java2d/image'
 
 class Gruff::Base
   def to_image
-    Java2d::Image.new(to_blob)
+    Java2d.make_image(to_blob)
   end
 end
 

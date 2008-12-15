@@ -4,6 +4,10 @@ module Java2d
   import javax.imageio.ImageIO
   import javax.swing.JFrame
 
+  def self.make_image(str)
+    ImageIO.read(ByteArrayInputStream.new(str.to_java_bytes))
+  end
+
   class ImagePanel < javax.swing.JPanel
     def initialize(image, x=0, y=0)
       super()
@@ -20,37 +24,7 @@ module Java2d
     end
 
     def paintComponent(graphics)
-      graphics.draw_image(@image.java_image, @x, @y, nil)
-    end
-  end
-
-  class WindowClosed
-    def initialize(block = nil)
-      @block = block || proc { java.lang.System.exit(0) }
-    end
-    def method_missing(meth,*args); end
-    def windowClosing(event); @block.call; end
-  end
-
-  class Image
-    def initialize(bytes)
-      @bytes = bytes
-    end
-
-    def width
-      java_image.width
-    end
-
-    def height
-      java_image.height
-    end
-
-    def java_image
-      unless @image
-        bytes =  String === @bytes ? @bytes.to_java_bytes : @bytes
-        @image = ImageIO.read(ByteArrayInputStream.new(bytes))
-      end
-      @image
+      graphics.draw_image(@image, @x, @y, nil)
     end
   end
 
@@ -73,6 +47,14 @@ module Java2d
       @frame.set_bounds 0, 0, @image.width + 20, @image.height + 40
       @panel = @frame.add(ImagePanel.new(@image, 10, 10))
       @frame.visible = true
+    end
+
+    class WindowClosed
+      def initialize(block = nil)
+        @block = block || proc { java.lang.System.exit(0) }
+      end
+      def method_missing(meth,*args); end
+      def windowClosing(event); @block.call; end
     end
   end
 end
