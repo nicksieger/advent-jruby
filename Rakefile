@@ -19,19 +19,22 @@ namespace :jmx do
   end
 
   desc "Simple JMX memory monitoring example"
-  task :simple => :connect do
+  task :memory => :connect do
     JMXExamples.print_memory_usage
   end
 
   desc "Gruff/JMX example plotting memory usage over time"
-  task :memory => :connect do
+  task :tracker => :connect do
     require 'rubyadvent/gruffexamples'
-    GruffExamples.memory_visualizer
+    GruffExamples.memory_tracker
   end
 end
 
+desc "Run IRB with Gruff, RMagick4j and JMX loaded"
 task :irb do
   ARGV.clear
   require 'irb'
+  require 'rubyadvent/gruffexamples'
+  require 'rubyadvent/jmxexamples'
   IRB.start(__FILE__)
 end

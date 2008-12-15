@@ -1,2 +1,3 @@
+git clone git://github.com/topfunky/gruff.git && cd gruff && git co 523096508be1b9674692927e67f41dd4ae168200
 svn export -r1135 http://jruby-extras.rubyforge.org/svn/trunk/jmx
 svn export -r152 http://rmagick4j.googlecode.com/svn/trunk/RMagick4J

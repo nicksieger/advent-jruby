@@ -25,7 +25,7 @@ class GruffExamples
     app.show
   end
 
-  def self.memory_visualizer
+  def self.memory_tracker
     @app = Java2d::ImageApp.new
     @app.title = "Memory"
     JMXExamples::MemorySampler.new do |s|
