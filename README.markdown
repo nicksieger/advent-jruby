@@ -93,7 +93,7 @@ a new `ImagePanel`, pack the panel into a `JFrame`, and show the frame.
 `to_java_bytes` is a JRuby-specific method on Ruby's String class that
 converts the string to a Java `byte[]`.
 
-If you're following along, if all goes well, you should be seeing
+If you're following along, and all goes well, you should be seeing
 this:
 
 ![gruff-simple](http://img.skitch.com/20081215-1bid2e7e9erjxm4dr8tk5fra3u.jpg)
