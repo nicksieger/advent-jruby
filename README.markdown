@@ -238,7 +238,7 @@ recent samples.
 
     @app = ImageApp.new
     @app.title = "Memory"
-    JMXExamples::MemorySampler.new do |s|
+    MemorySampler.new do |s|
       g = Gruff::Line.new("400x300")
       g.title = @app.title
       g.y_axis_label = "MB"
